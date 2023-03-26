@@ -1,0 +1,11 @@
+{
+    "name": "jira-todos",
+    "version": "1.0.0",
+    "description": "Todos and reminders in a JIRA-like format.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "coderkearns <https://github.com/coderkearns>",
+    "license": "MIT"
+}
