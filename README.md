@@ -4,7 +4,17 @@ Todos and reminders in a JIRA-like format.
 
 ## API
 
-Todos currently have the following interface:
+Users follow this interface:
+
+```typescript
+{
+    username: string,  // A lowercase and url-safe string to uniquely identify users.
+    name: string,      // A display name. Optional and same as username by default.
+    tasks: Array<Task> // An array of all the user's tasks (both present and complete)
+}
+```
+
+Tasks:
 
 ```typescript
 {
@@ -30,6 +40,7 @@ enum Status {
 
 ## Todos
 
+- [X] User accounts
 - [ ] Basic displays
 - [ ] Adding new tasks
 - [ ] Linking tasks
