@@ -8,12 +8,12 @@ Todos currently have the following interface:
 
 ```typescript
 {
-    id: number                    // A unique ID to represent to todo.
-    title: string,                // A 1-sentence description of the task.
-    description: string?,         // A longer description, possibly including requirements or steps. Optional.
-    status: Status as number,     // A memebr of the status enum representing the what step of completion the task is in.
-    due: `<year>/<month>/<day>`?, // The date the task is due, in the format "YYYY/MM/DD". Optional.
-    difficulty: number?           // The relative difficulty of the task. Difficulty is determined in batches and coordinates to relative time to complete.
+    id: number                // A unique ID to represent to todo.
+    title: string,            // A 1-sentence description of the task.
+    description: string?,     // A longer description, possibly including requirements or steps. Optional.
+    status: Status as number, // A memebr of the status enum representing the what step of completion the task is in.
+    due: string?,             // The date the task is due, in the format "YYYY/MM/DD". Optional.
+    difficulty: number?       // The relative difficulty of the task. Difficulty is determined in batches and coordinates to relative time to complete.
 }
 ```
 
