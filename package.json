@@ -4,7 +4,8 @@
     "description": "Todos and reminders in a JIRA-like format.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node www.js",
+        "dev": "node --watch www.js"
     },
     "author": "coderkearns <https://github.com/coderkearns>",
     "license": "MIT",
