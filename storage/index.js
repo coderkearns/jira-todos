@@ -10,13 +10,13 @@ module.exports = function storage(savePath) {
     return {
         savePath,
         _currentData: {},
-        load(key) {
+        load() {
             const files = fs.readdirSync(savePath)
 
             for (const file of files) {
-                const filePath = path.join(savePath, file).replace(".json", "")
+                const filePath = path.join(savePath, file)
                 const data = JSON.parse(fs.readFileSync(filePath))
-                this._currentData[key] = data
+                this._currentData[filePath.replace(".json", "")] = data
             }
         },
         save(user) {
