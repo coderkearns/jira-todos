@@ -9,6 +9,7 @@ const storage = require("./storage")
 app.store = storage(path.join(__dirname, "/db/"))
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.set("view engine", "ejs")
 
@@ -26,6 +27,8 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     const username = req.body.username
+
+    console.log(username)
 
     if (!app.store.has(username)) {
         res.render("error", { status: 404, message: "User not found", username: false })

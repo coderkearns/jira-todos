@@ -1,20 +1,30 @@
 <html>
 
 <head>
-    <title>Tasks</title>
+    <title>Login | Tasks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/shared.css">
-    <link rel="stylesheet" href="assets/error.css">
+    <link rel="stylesheet" href="assets/login.css">
 </head>
 
 <body>
     <%- include("includes/header", { username }) %>
 
         <main>
+            <form action="/login" method="post">
+                <p>Username</p>
+                <input type="text" name="username">
+                <input type="submit" value="Login">
+            </form>
 
+            <form action="/signup" method="post">
+                <p>Username</p>
+                <input type="text" name="username">
+                <input type="submit" value="Sign Up">
+            </form>
         </main>
 
-        <script src="assets/index.js"></script>
+        <script src="assets/login.js"></script>
 </body>
 
 </html>
