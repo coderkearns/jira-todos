@@ -8,6 +8,8 @@ module.exports = app
 const storage = require("./storage")
 app.store = storage(path.join(__dirname, "/db/"))
 
+app.store.load()
+
 app.get("/", (req, res) => {
-    res.send("Hello World")
+    res.json(app.store._currentData)
 })
