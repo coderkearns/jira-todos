@@ -37,16 +37,19 @@ module.exports = function storage(savePath) {
             }
             this.save(username)
         },
-        get(user) {
-            return this._currentData[user] || DEFAULT_USER
+        has(username) {
+            return this._currentData.hasOwnProperty(username)
         },
-        getUserTasks(user) {
-            return this._currentData[user].tasks
+        get(username) {
+            return this._currentData[username] || DEFAULT_USER
+        },
+        getUserTasks(username) {
+            return this._currentData[username].tasks
         },
         getAllTasks() {
             return Object.values(this._currentData).map(user => user.tasks).reduce((a, b) => a.concat(b), [])
         },
-        add(user, title, { description, due }) {
+        add(username, title, { description, due }) {
             const task = {
                 id: generateTaskID(),
                 title,
@@ -55,22 +58,22 @@ module.exports = function storage(savePath) {
                     due
                 }
             }
-            this._currentData[user].tasks.push(task)
-            this.save(user)
+            this._currentData[username].tasks.push(task)
+            this.save(username)
             return task
         },
-        update(user, id, updates) {
-            const task = this._currentData[user].tasks.find(task => task.id === id)
+        update(username, taskId, updates) {
+            const task = this._currentData[username].tasks.find(task => task.id === taskId)
             if (task) {
                 Object.assign(task, updates)
-                this.save(user)
+                this.save(username)
                 return task
             }
             return null
         },
-        delete(user, id) {
-            this._currentData[user].tasks = this._currentData[user].tasks.filter(task => task.id !== id)
-            this.save(user)
+        delete(username, taskId) {
+            this._currentData[username].tasks = this._currentData[username].tasks.filter(task => task.id !== taskId)
+            this.save(username)
         }
     }
 }
