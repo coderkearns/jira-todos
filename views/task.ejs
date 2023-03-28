@@ -1,17 +1,26 @@
 <html>
 
 <head>
-    <title>Tasks</title>
+    <title>
+        <%= username %>-<%= task.id %> | Tasks
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/shared.css">
-    <link rel="stylesheet" href="assets/task.css">
+    <link rel="stylesheet" href="../assets/shared.css">
+    <link rel="stylesheet" href="../assets/task.css">
 </head>
 
 <body>
     <%- include("includes/header", { username }) %>
 
         <main>
-
+            <div id="subdiv">
+                <h1>
+                    <textarea class="editable" id="title"><%= task.title %></textarea>
+                </h1>
+                <p>
+                    <textarea class="editable" id="description" data-multiline><%= task.description || "" %></textarea>
+                </p>
+            </div>
         </main>
 
         <script src="assets/task.js"></script>
