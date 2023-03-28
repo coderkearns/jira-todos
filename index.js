@@ -78,3 +78,7 @@ app.get("/t/:username-:taskid", (req, res) => {
 
     res.render("task", { username, task })
 })
+
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).render("error", { status: err.status || 500, message: err.message })
+})
