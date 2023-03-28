@@ -21,14 +21,14 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-    res.render("login")
+    res.render("login", { username: false })
 })
 
 app.post("/login", (req, res) => {
     const username = req.body.username
 
     if (!app.store.has(username)) {
-        res.render("error", { status: 404, message: "User not found" })
+        res.render("error", { status: 404, message: "User not found", username: false })
     }
 
     res.redirect(`/u/${username}`)
@@ -38,7 +38,7 @@ app.post("/signup", (req, res) => {
     const username = req.body.username
 
     if (app.store.has(username)) {
-        res.render("error", { status: 409, message: "User already exists" })
+        res.render("error", { status: 409, message: "User already exists", username: false })
     }
 
     app.store.createUser(username, req.body.name || req.body.username)
@@ -49,7 +49,7 @@ app.get("/u/:username", (req, res) => {
     const username = req.params.username
 
     if (!app.store.has(username)) {
-        res.status(404).render("error", { status: 404, message: "User not found" })
+        res.status(404).render("error", { status: 404, message: "User not found", username })
         return
     }
 
@@ -60,25 +60,31 @@ app.get("/t/:username-:taskid", (req, res) => {
     const username = req.params.username
     const taskId = parseInt(req.params.taskid)
 
-    if (isNaN(taskId)) {
-        res.status(400).render("error", { status: 400, message: "Task ID must be \"username-number\"" })
+    if (!app.store.has(username)) {
+        res.status(404).render("error", { status: 404, message: "User not found", username: false })
         return
     }
 
-    if (!app.store.has(username)) {
-        res.status(404).render("error", { status: 404, message: "User not found" })
+    if (isNaN(taskId)) {
+        res.status(400).render("error", { status: 400, message: "Task ID must be \"username-number\"", username })
         return
     }
 
     const task = app.store.getUserTasks(username).find(t => t.id === taskId)
     if (!task) {
-        res.status(404).render("error", { status: 404, message: "Task not found" })
+        res.status(404).render("error", { status: 404, message: "Task not found", username })
         return
     }
 
     res.render("task", { username, task })
 })
 
+
+// Error Handling
+app.use((req, res) => {
+    res.status(404).render("error", { status: 404, message: "Page not found", username: false })
+})
+
 app.use((err, req, res, next) => {
-    res.status(err.status || 500).render("error", { status: err.status || 500, message: err.message })
+    res.status(err.status || 500).render("error", { status: err.status || 500, message: err.message, username: false })
 })
