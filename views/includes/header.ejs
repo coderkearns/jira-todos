@@ -1,0 +1,7 @@
+<header>
+    <% if (!username) { %>
+        <a href="login">Login</a>
+    <% } else { %>
+        <a href="/u/<%= username %>"><%= username %></a>
+    <% } %>
+</header>
